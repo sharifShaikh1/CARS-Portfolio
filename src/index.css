@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Cars-themed Racing Portfolio */
+    --background: 220 15% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Lightning Red - Primary racing color */
+    --primary: 0 76% 55%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Thunder Blue - Secondary racing color */
+    --secondary: 207 82% 48%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Asphalt Gray */
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 65%;
+
+    /* Chrome/Yellow Accent */
+    --accent: 45 100% 51%;
+    --accent-foreground: 220 15% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 18%;
+    --ring: 0 76% 55%;
+
+    --radius: 0.75rem;
+
+    /* Racing gradients */
+    --gradient-racing: linear-gradient(135deg, hsl(0, 76%, 55%), hsl(0, 86%, 45%));
+    --gradient-speed: linear-gradient(90deg, hsl(207, 82%, 48%), hsl(220, 82%, 58%));
+    --gradient-asphalt: linear-gradient(180deg, hsl(220, 15%, 8%), hsl(220, 15%, 12%));
+    --gradient-chrome: linear-gradient(135deg, hsl(0, 0%, 75%), hsl(0, 0%, 95%), hsl(0, 0%, 75%));
+    
+    /* Racing effects */
+    --shadow-racing: 0 0 30px hsl(0, 76%, 55% / 0.5);
+    --shadow-speed: 0 10px 40px hsl(0, 0%, 0% / 0.6);
+    --glow-primary: 0 0 20px hsl(0, 76%, 55% / 0.8);
+    --glow-secondary: 0 0 20px hsl(207, 82%, 48% / 0.8);
+    
+    /* Animations */
+    --transition-speed: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(180deg, hsl(220, 15%, 8%), hsl(220, 15%, 10%));
+    font-feature-settings: "liga" 1;
+  }
+  
+  /* Racing stripes effect */
+  .racing-stripes {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      hsl(0, 0%, 100% / 0.03) 10px,
+      hsl(0, 0%, 100% / 0.03) 20px
+    );
+  }
+  
+  /* Speed lines animation */
+  @keyframes speed-lines {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  .speed-line {
+    animation: speed-lines 2s ease-in-out infinite;
+  }
+  
+  /* Glow effect */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+  
+  /* Chrome effect */
+  .chrome-text {
+    background: var(--gradient-chrome);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer components {
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: hsl(var(--foreground));
+  }
+
+  .prose p, .prose ul, .prose ol, .prose li {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .prose a {
+    color: hsl(var(--primary));
+  }
+
+  .prose strong {
+    color: hsl(var(--foreground));
+  }
+}
