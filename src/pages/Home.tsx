@@ -44,13 +44,12 @@ const Home = () => {
             </h1>
             
             <div className="text-2xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-              Full-Stack Developer
+              Software Developer
             </div>
             
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Racing through the MERN stack at full throttle. Building high-performance web applications that go from 0 to production in record time.
-            </p>
-
+                          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                            Building high-performance web and mobile applications. I specialize in the MERN stack and React Native, always ready to tackle new challenges and technologies.
+                          </p>
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Link to="/projects">

@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Code2, Rocket, Users, Trophy } from "lucide-react";
 
 const About = () => {
@@ -48,10 +49,15 @@ const About = () => {
         <Card className="mb-12 p-8 bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 relative overflow-hidden">
           <div className="racing-stripes absolute inset-0 opacity-30" />
           <div className="relative z-10">
+            <div className="flex items-center justify-between">
             <h3 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
               <Trophy className="w-8 h-8" />
               Career Objective
             </h3>
+            <a href="/Sharif_chand_shaikh.pdf" download>
+                <Button variant="racing">Download Resume</Button>
+              </a>
+            </div>
             <p className="text-lg text-foreground/90 leading-relaxed">
               Motivated and detail-oriented Computer Science graduate with hands-on experience in full-stack development 
               using the MERN stack. Strong problem-solving abilities, effective communication skills, and a deep passion 
