@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { projects } from "@/lib/projectsData";
-import ReactMarkdown from "react-markdown";
-import { Card } from "@/components/ui/card";
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 
 const ProjectDetailsPage = () => {
   const { id } = useParams();
@@ -14,6 +14,9 @@ const ProjectDetailsPage = () => {
   if (!project) {
     return <div>Project not found</div>;
   }
+
+  const ProjectComponent = project.component;
+
 
   return (
     <section className="py-24 relative">
@@ -31,22 +34,84 @@ const ProjectDetailsPage = () => {
                 ))}
               </div>
               <div className="flex flex-wrap gap-4 mb-8">
-                <Button asChild>
+                {project.liveUrl && <Button asChild>
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="mr-2 h-4 w-4" />
                     Live Site
                   </a>
-                </Button>
-                <Button variant="outline" asChild>
+                </Button>}
+                {project.githubUrl && <Button variant="outline" asChild>
                   <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                     <Github className="mr-2 h-4 w-4" />
                     Source Code
                   </a>
-                </Button>
+                </Button>}
               </div>
-              <div className="prose prose-lg max-w-none dark:prose-invert">
-                <ReactMarkdown>{project.readme}</ReactMarkdown>
-              </div>
+
+              {ProjectComponent ? (
+                <ProjectComponent project={project} />
+              ) : (
+                <>
+                  <Card className="mb-8">
+                    <CardHeader>
+                      <CardTitle>Overview</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {/* Markdown content: use Tailwind Typography (prose) but disable the default max-width
+                          and make images/code/tables responsive to avoid overflow inside the card. */}
+                      <div className="w-full overflow-hidden">
+                        <div className="prose prose-sm dark:prose-invert max-w-none">
+                          <ReactMarkdown
+                            components={{
+                              img: (props: any) => (
+                                // make images responsive
+                                // eslint-disable-next-line jsx-a11y/alt-text
+                                <img className="max-w-full h-auto rounded" {...props} />
+                              ),
+                              pre: (props: any) => (
+                                <pre className="overflow-auto rounded bg-muted px-4 py-3 my-2">{props.children}</pre>
+                              ),
+                              code: (props: any) => {
+                                const { inline, children } = props;
+                                return inline ? (
+                                  <code className="bg-muted px-1 rounded text-sm">{children}</code>
+                                ) : (
+                                  <code className="block overflow-auto rounded bg-muted p-2 my-2">{children}</code>
+                                );
+                              },
+                              table: (props: any) => (
+                                <div className="overflow-auto my-2">
+                                  <table className="min-w-full">{props.children}</table>
+                                </div>
+                              ),
+                              a: (props: any) => (
+                                <a className="text-primary underline" {...props}>{props.children}</a>
+                              ),
+                            }}
+                          >
+                            {project.readme || project.description}
+                          </ReactMarkdown>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {project.features && project.features.length > 0 && (
+                    <Card className="mb-8">
+                      <CardHeader>
+                        <CardTitle>Features</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc list-inside">
+                          {project.features.map((feature, index) => (
+                            <li key={index}>{feature}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </Card>

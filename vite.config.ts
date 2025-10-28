@@ -15,4 +15,5 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  assetsInclude: ['**/*.gltf', '**/*.glb'], // Explicitly include GLTF and GLB files as assets
 }));

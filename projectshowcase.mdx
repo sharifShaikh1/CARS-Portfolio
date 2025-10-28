@@ -1,0 +1,412 @@
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  Smartphone, Shield, Server, Zap, DollarSign, BarChart2, 
+  Mail, MapPin, MessageSquare, Activity, Database, Code, Workflow
+} from 'lucide-react';
+
+# FieldSync: Enterprise Field Service Management Platform
+
+<div className="flex flex-wrap gap-2 my-6">
+  <Badge variant="default" className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">Full-Stack Development</Badge>
+  <Badge variant="default" className="bg-gradient-to-r from-purple-600 to-purple-700 text-white">Real-Time Architecture</Badge>
+  <Badge variant="default" className="bg-gradient-to-r from-green-600 to-green-700 text-white">Multi-Tenant SaaS</Badge>
+  <Badge variant="default" className="bg-gradient-to-r from-red-600 to-red-700 text-white">B2B Platform</Badge>
+  <Badge variant="default" className="bg-gradient-to-r from-orange-600 to-orange-700 text-white">Mobile-First</Badge>
+</div>
+
+**FieldSync** is a production-grade field service management platform built from scratch to solve real operational challenges. This enterprise SaaS solution handles the complete lifecycle of field operations—from automated ticket creation through email parsing, real-time engineer tracking with background GPS, instant multi-party communication, to secure payment processing across Stripe and Razorpay.
+
+The system manages multiple client companies with strict role-based access control, processes 100+ tickets simultaneously, tracks field engineers in real-time, and maintains bank-grade security with multi-layer protection.
+
+---
+
+## 🎯 The Problem
+
+Field service companies struggle with:
+- **Manual ticket creation**: 5-10 minutes per ticket, prone to errors
+- **Zero visibility**: No idea where engineers are or job status
+- **Communication chaos**: Phone calls, SMS, and WhatsApp scattered everywhere
+- **Multi-company complexity**: No unified system for managing multiple clients
+- **Payment tracking**: Manual invoicing and payment reconciliation
+
+---
+
+## 🏗️ System Architecture
+
+Three-tier architecture with REST + GraphQL APIs, Socket.IO for real-time communication, and cloud-native file storage.
+
+<div className="grid md:grid-cols-3 gap-6 my-8">
+  <Card className="border-blue-500 border-2 shadow-xl hover:shadow-2xl transition-shadow">
+    <CardHeader className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900">
+      <CardTitle className="flex items-center gap-3 text-blue-700 dark:text-blue-300">
+        <Server className="w-8 h-8" />
+        <div>
+          <div className="text-lg">Backend API</div>
+          <div className="text-xs font-normal text-muted-foreground">Node.js + Express + MongoDB</div>
+        </div>
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="pt-4">
+      <ul className="text-xs space-y-1.5 text-muted-foreground">
+        <li>• REST & GraphQL hybrid API</li>
+        <li>• Socket.IO real-time events</li>
+        <li>• Multi-layer security (Helmet, HMAC, Rate limiting)</li>
+        <li>• JWT auth with token blacklisting</li>
+        <li>• AWS S3 + Cloudinary file storage</li>
+        <li>• Stripe & Razorpay integration</li>
+      </ul>
+    </CardContent>
+  </Card>
+  
+  <Card className="border-purple-500 border-2 shadow-xl hover:shadow-2xl transition-shadow">
+    <CardHeader className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950 dark:to-purple-900">
+      <CardTitle className="flex items-center gap-3 text-purple-700 dark:text-purple-300">
+        <Zap className="w-8 h-8" />
+        <div>
+          <div className="text-lg">Admin Dashboard</div>
+          <div className="text-xs font-normal text-muted-foreground">React 19 + Vite</div>
+        </div>
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="pt-4">
+      <ul className="text-xs space-y-1.5 text-muted-foreground">
+        <li>• Real-time analytics dashboard</li>
+        <li>• Ticket lifecycle management</li>
+        <li>• Google Maps engineer tracking</li>
+        <li>• Excel bulk import/export</li>
+        <li>• Multi-tenant company management</li>
+        <li>• Dark mode + Responsive design</li>
+      </ul>
+    </CardContent>
+  </Card>
+  
+  <Card className="border-green-500 border-2 shadow-xl hover:shadow-2xl transition-shadow">
+    <CardHeader className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900">
+      <CardTitle className="flex items-center gap-3 text-green-700 dark:text-green-300">
+        <Smartphone className="w-8 h-8" />
+        <div>
+          <div className="text-lg">Mobile App</div>
+          <div className="text-xs font-normal text-muted-foreground">React Native + Expo</div>
+        </div>
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="pt-4">
+      <ul className="text-xs space-y-1.5 text-muted-foreground">
+        <li>• Background GPS location tracking</li>
+        <li>• Real-time ticket notifications</li>
+        <li>• Secure authentication (Expo Secure Store)</li>
+        <li>• Offline-first data caching</li>
+        <li>• File upload with progress tracking</li>
+        <li>• Digital ID cards with QR codes</li>
+      </ul>
+    </CardContent>
+  </Card>
+</div>
+
+---
+
+## 💎 Core Features
+
+### <Database className="inline-block w-7 h-7 mr-2 text-blue-600" /> Multi-Tenant Data Architecture
+
+### <Database className="inline-block w-7 h-7 mr-2 text-blue-600" /> Multi-Tenant Data Architecture
+
+**Complex Mongoose schemas with company-scoped queries ensuring complete data isolation between tenants.**
+
+- **Ticket Model**: Interaction logging for audit trails, multi-stage assignment workflow (pending → accepted → rejected), dynamic visibility rules (Draft, Direct Engineer, Service Provider, All Engineers)
+- **Role-Based Access Control**: 5 role types (Admin, NetCovet Manager, Company Admin, Supervisor, Engineer) with middleware-enforced permissions
+- **Company Scoping**: All database queries filtered by companyId to prevent cross-tenant data leaks
+
+```javascript
+// Complete audit trail for every ticket action
+interactions: [{ 
+  event: String,      // "Created", "Assigned", "Status Changed"
+  actor: String,      // User who performed the action
+  timestamp: Date
+}]
+```
+
+**Security Implementation**:
+- Helmet.js with CSP policies + HSTS headers
+- Rate limiting (progressive slow-down + hard limits)
+- HMAC signature validation on critical endpoints
+- MongoDB injection & XSS sanitization on all inputs
+- JWT with refresh tokens + blacklist for instant revocation
+- Bcrypt password hashing (12 rounds)
+
+---
+
+### <Mail className="inline-block w-7 h-7 mr-2 text-purple-600" /> Automated Email-to-Ticket System
+
+**Zero manual data entry. Emails sent to dedicated inbox are automatically parsed and converted to tickets.**
+
+- **Mailslurp + IMAP**: Monitors dedicated inbox in real-time
+- **Smart Parsing**: Extracts sender, subject, body, attachments using `mailparser`
+- **Auto-Assignment**: Matches sender email to company and assigns ticket
+- **Error Handling**: Retry logic with admin notifications on failures
+
+```javascript
+const processEmails = async () => {
+  const messages = await connection.search(['UNSEEN']);
+  for (const email of messages) {
+    const parsed = await parseEmail(email);
+    await createTicket({
+      senderEmail: parsed.from,
+      subject: parsed.subject,
+      description: parsed.body
+    });
+  }
+};
+```
+
+**Result**: Ticket creation time reduced from 5-10 minutes to **instant**.
+
+---
+
+### <MapPin className="inline-block w-7 h-7 mr-2 text-green-600" /> Real-Time Location Tracking
+
+**Background GPS tracking continues even when app is closed or backgrounded.**
+
+- **Expo Location + Task Manager**: Native background location services
+- **Smart Updates**: Triggers on 10m distance change OR every 5 seconds
+- **Battery Optimized**: Configurable accuracy levels
+- **Android Foreground Service**: Persistent notification for compliance
+
+```javascript
+await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+  accuracy: Location.Accuracy.High,
+  distanceInterval: 10,
+  timeInterval: 5000,
+  foregroundService: {
+    notificationTitle: 'Location Tracking Active'
+  }
+});
+```
+
+**Admin Dashboard**: Live Google Maps showing all active engineers, location history, proximity alerts for job sites.
+
+---
+
+### <MessageSquare className="inline-block w-7 h-7 mr-2 text-orange-600" /> Real-Time Chat System
+
+**Socket.IO-powered messaging with file sharing, typing indicators, and read receipts.**
+
+- **Room Architecture**: Ticket-based chat rooms + direct messaging
+- **Rich Media**: Images, PDFs, documents stored on AWS S3
+- **GraphQL Integration**: Message history with efficient pagination
+- **Authenticated Sockets**: JWT verification on socket connection
+
+```javascript
+io.use(async (socket, next) => {
+  const token = extractToken(socket);
+  const user = await authenticateToken(token);
+  socket.user = user;
+  next();
+});
+```
+
+**Features**: File uploads up to 50MB, message delivery status, typing indicators, conversation history across web and mobile.
+
+---
+
+### <Workflow className="inline-block w-7 h-7 mr-2 text-red-600" /> Intelligent Ticket Workflow
+
+**Automated status transitions with configurable visibility and pricing rules.**
+
+**Lifecycle**: Draft → Open → In Progress → On-Hold (with reason) → Closed (with remarks)
+
+**Assignment Flow**: 
+- Admin assigns → Engineer receives notification → Engineer accepts/rejects → Ticket tracks acceptance count vs required engineers
+
+**Visibility Controls**:
+- **Draft**: Only visible to admins
+- **Direct Engineer**: Assigned engineer only
+- **Service Provider**: All service provider engineers
+- **Visible to All**: All available engineers
+
+**Bulk Operations**: Import 100+ tickets from Excel, bulk status updates, automated email notifications.
+
+---
+
+### <BarChart2 className="inline-block w-7 h-7 mr-2 text-indigo-600" /> Analytics Dashboard
+
+**Real-time KPIs with WebSocket updates and Framer Motion animations.**
+
+- **Ticket Metrics**: Open, In-Progress, Closed, On-Hold counts with trend analysis
+- **Financial Data**: Total revenue, pending payments, average ticket value
+- **Performance**: Average resolution time, engineer acceptance rates
+- **Export**: Filterable reports to Excel with ExcelJS
+
+---
+
+### <DollarSign className="inline-block w-7 h-7 mr-2 text-yellow-600" /> Dual Payment Gateway Integration
+
+**Global payment support with Stripe (international) and Razorpay (India/UPI).**
+
+**Stripe**: Payment intents, webhook handling, automatic reconciliation, refunds  
+**Razorpay**: UPI payments, order verification, payment links, engineer payouts
+
+**Features**: Automated invoicing on ticket closure, payment status tracking, manual UPI override for offline transactions.
+
+---
+
+## 🛠️ Technology Stack
+
+### Backend
+- **Runtime**: Node.js 20.x + Express.js 4.x
+- **Database**: MongoDB Atlas + Mongoose ODM
+- **Real-Time**: Socket.IO 4.x with room-based architecture
+- **API**: REST + GraphQL (express-graphql)
+- **Auth**: JWT with access/refresh tokens + blacklist
+- **Storage**: AWS S3 + Cloudinary
+- **Payments**: Stripe + Razorpay SDKs
+- **Email**: Nodemailer + Mailslurp client
+- **Security**: Helmet, express-rate-limit, express-validator, xss-clean, mongo-sanitize
+- **Logging**: Winston with file rotation
+
+### Admin Dashboard
+- **Framework**: React 19 + Vite 7.x
+- **Routing**: React Router v7
+- **UI**: Tailwind CSS 3.x + Shadcn/UI + Radix UI
+- **Animations**: Framer Motion
+- **API Client**: Axios + Apollo Client (GraphQL)
+- **Maps**: @react-google-maps/api
+- **Utils**: ExcelJS, Socket.IO Client
+
+### Mobile App
+- **Framework**: React Native 0.79 + Expo SDK 53
+- **Navigation**: React Navigation 6 (Stack + Tabs)
+- **Styling**: NativeWind (Tailwind for RN)
+- **Location**: expo-location + expo-task-manager
+- **Storage**: Expo Secure Store + AsyncStorage
+- **Maps**: react-native-maps
+- **QR**: react-native-qrcode-svg
+- **Auth**: Socket.IO Client for real-time
+
+---
+
+## 📊 Technical Achievements
+
+<div className="grid md:grid-cols-2 gap-6 my-8">
+  <Card className="border-l-4 border-l-blue-500">
+    <CardHeader>
+      <CardTitle className="text-lg flex items-center gap-2">
+        <Code className="w-5 h-5 text-blue-500" />
+        Architecture & Scale
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-2 text-sm">
+      <div>✅ <strong>40,000+ lines</strong> of production code across backend, web, and mobile</div>
+      <div>✅ <strong>13 custom middleware</strong> modules for security, auth, validation</div>
+      <div>✅ <strong>5 Mongoose models</strong> with complex relationships and validations</div>
+      <div>✅ <strong>12 route modules</strong> + GraphQL schema with resolvers</div>
+      <div>✅ <strong>35+ React components</strong> + 15 mobile screens</div>
+      <div>✅ <strong>REST + GraphQL + WebSocket</strong> hybrid API architecture</div>
+    </CardContent>
+  </Card>
+
+  <Card className="border-l-4 border-l-green-500">
+    <CardHeader>
+      <CardTitle className="text-lg flex items-center gap-2">
+        <Activity className="w-5 h-5 text-green-500" />
+        Performance & Real-Time
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-2 text-sm">
+      <div>✅ <strong>Socket.IO multiplexing</strong> for instant ticket updates across all clients</div>
+      <div>✅ <strong>Pagination</strong> on all list endpoints (handles 100+ records efficiently)</div>
+      <div>✅ <strong>Database indexing</strong> on companyId, status, assignedPersonnel</div>
+      <div>✅ <strong>Cloud storage</strong> for 50MB+ files offloaded from app server</div>
+      <div>✅ <strong>Background tasks</strong> for location tracking without draining battery</div>
+      <div>✅ <strong>Code splitting</strong> and lazy loading in React dashboard</div>
+    </CardContent>
+  </Card>
+
+  <Card className="border-l-4 border-l-purple-500">
+    <CardHeader>
+      <CardTitle className="text-lg flex items-center gap-2">
+        <Shield className="w-5 h-5 text-purple-500" />
+        Security & Compliance
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-2 text-sm">
+      <div>✅ <strong>Multi-tenant isolation</strong> at database query level</div>
+      <div>✅ <strong>RBAC with 5 roles</strong> and middleware-enforced permissions</div>
+      <div>✅ <strong>JWT auth</strong> with httpOnly cookies + Secure Store (mobile)</div>
+      <div>✅ <strong>HMAC validation</strong> on sensitive operations</div>
+      <div>✅ <strong>XSS & SQL injection</strong> prevention on all inputs</div>
+      <div>✅ <strong>Rate limiting</strong> per endpoint + IP-based throttling</div>
+    </CardContent>
+  </Card>
+
+  <Card className="border-l-4 border-l-orange-500">
+    <CardHeader>
+      <CardTitle className="text-lg flex items-center gap-2">
+        <Zap className="w-5 h-5 text-orange-500" />
+        Integrations & Automation
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-2 text-sm">
+      <div>✅ <strong>Stripe + Razorpay</strong> dual payment gateway support</div>
+      <div>✅ <strong>Email-to-ticket</strong> automation with Mailslurp + IMAP</div>
+      <div>✅ <strong>Google Maps API</strong> for location services and tracking</div>
+      <div>✅ <strong>AWS S3 + Cloudinary</strong> for scalable file management</div>
+      <div>✅ <strong>Excel import/export</strong> for bulk ticket operations</div>
+      <div>✅ <strong>Push notifications</strong> for mobile job assignments</div>
+    </CardContent>
+  </Card>
+</div>
+
+---
+
+## 📈 Business Impact
+
+**Operational Efficiency**:
+- **90% faster** ticket creation through email automation
+- **Real-time visibility** into 100+ field engineers simultaneously
+- **Instant communication** eliminating phone tag and SMS chaos
+- **Automated workflows** reducing manual status updates and data entry
+
+**Scalability**:
+- Multi-tenant architecture supporting unlimited client companies
+- Stateless API design ready for horizontal scaling
+- Cloud storage handling unlimited file uploads
+- Database indexing delivering sub-second query performance
+
+---
+
+## 🎨 Code Organization
+
+```
+backend/
+├── middleware/        # 13 modules: auth, security, validation, rate limiting
+├── models/           # 5 Mongoose schemas: User, Ticket, Company, Conversation, Message
+├── routes/           # 12 REST endpoints: auth, tickets, users, companies, payments
+├── graphql/          # Schema + resolvers for messages/conversations
+├── socket/           # Socket.IO chat implementation
+├── utils/            # Email processing, logging, database helpers
+└── s3.js            # AWS S3 file upload configuration
+
+admin-panel/
+├── src/
+│   ├── components/   # 35+ reusable components (DashboardHome, TicketTable, UserManagement, ChatLayout)
+│   ├── lib/         # API client with Axios interceptors
+│   ├── context/     # Auth state + Socket connection management
+│   └── config.js    # Environment configuration
+
+mobile-app/
+├── screens/         # 15 screens: Login, Home, TicketChat, MapScreen, Payments
+├── components/      # 11 components: ActiveTicketCard, ChatMessageBubble, IdCard
+├── context/         # AuthContext + SocketContext
+├── services/        # Background location task, chat service
+└── navigators/      # Stack + Tab navigation setup
+```
+
+---
+
+## 📝 Summary
+
+FieldSync is a complete, production-ready SaaS platform demonstrating full-stack development across three codebases. The system handles complex multi-tenant operations, real-time communication, background processing, payment integration, and cloud services—all with enterprise-grade security.
+
+**Key Differentiators**: Email automation, background GPS tracking, dual payment gateways, Socket.IO real-time updates, multi-tenant isolation, role-based access control.

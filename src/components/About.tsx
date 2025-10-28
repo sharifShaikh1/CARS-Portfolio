@@ -46,17 +46,19 @@ const About = () => {
         </div>
 
         {/* Career Objective Card */}
-        <Card className="mb-12 p-8 bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 relative overflow-hidden">
+        <Card className="mb-12 p-4 sm:p-8 bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 relative overflow-hidden">
           <div className="racing-stripes absolute inset-0 opacity-30" />
           <div className="relative z-10">
-            <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-0 flex items-center gap-3">
               <Trophy className="w-8 h-8" />
               Career Objective
             </h3>
-            <a href="/Sharif_chand_shaikh.pdf" download>
-                <Button variant="racing">Download Resume</Button>
+            <div className="mt-3 sm:mt-0">
+              <a href="/Sharif_chand_shaikh.pdf" download>
+                <Button variant="racing" className="text-sm sm:text-base">Download Resume</Button>
               </a>
+            </div>
             </div>
             <p className="text-lg text-foreground/90 leading-relaxed">
               Motivated and detail-oriented Computer Science graduate with hands-on experience in full-stack development 

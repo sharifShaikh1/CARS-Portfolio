@@ -1,4 +1,5 @@
 import { Project } from "../projectsData";
+import * as React from "react";
 
 export const cravecrafters: Project = {
   id: "cravecrafters",
@@ -16,6 +17,7 @@ export const cravecrafters: Project = {
   liveUrl: "https://cravecrafters-frontend.onrender.com",
   githubUrl: "https://github.com/sharifshaikh1/cravecrafters-frontend",
   detailsUrl: "/project/cravecrafters",
+  // No custom component defined here so the default details renderer will show `readme`.
   readme: `
 # E-commerce Frontend
 

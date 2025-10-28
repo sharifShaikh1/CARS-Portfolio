@@ -94,6 +94,15 @@ export default {
           "0%": { transform: "translateY(20px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
+        "nitro-boost": {
+          "0%, 100%": { transform: "scale(1) rotate(0deg)", boxShadow: "0 0 10px hsl(45, 100%, 51% / 0.5)" },
+          "25%": { transform: "scale(1.05) rotate(-2deg)", boxShadow: "0 0 20px hsl(45, 100%, 51% / 0.8)" },
+          "75%": { transform: "scale(1.05) rotate(2deg)", boxShadow: "0 0 20px hsl(45, 100%, 51% / 0.8)" },
+        },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -103,6 +112,8 @@ export default {
         "drift": "drift 3s ease-in-out infinite",
         "zoom": "zoom 0.5s ease-out",
         "slide-up": "slide-up 0.6s ease-out",
+        "nitro-boost": "nitro-boost 1.5s ease-in-out infinite",
+        "spin-slow": "spin-slow 3s linear infinite",
       },
     },
   },
