@@ -26,13 +26,13 @@ interface TicketManagementSystemDetailsProps {
 
 const TicketManagementSystemDetails: React.FC<TicketManagementSystemDetailsProps> = ({ project }) => {
   return (
-  <div className="w-full max-w-full mx-auto p-4 overflow-x-hidden box-border">
+  <div className="w-full max-w-full mx-auto p-4 overflow-x-hidden box-border min-w-0">
       {/* Mobile-first layout - different from desktop: stacked, top carousel, collapsible sections */}
   <div className="md:hidden min-w-0">
         <h1 className="text-2xl font-bold mb-1">{project.title}</h1>
         <p className="text-sm text-muted-foreground mb-3">{project.subtitle}</p>
 
-  <div className="flex flex-wrap gap-2 mb-4 min-w-0 overflow-hidden">
+  <div className="flex flex-wrap gap-2 mb-4 min-w-0 overflow-hidden whitespace-normal">
           <Badge variant="default" className="bg-blue-600 text-white">Full-Stack</Badge>
           <Badge variant="default" className="bg-purple-600 text-white">Real-Time</Badge>
           <Badge variant="default" className="bg-green-600 text-white">Multi-Tenant</Badge>
@@ -114,8 +114,8 @@ const TicketManagementSystemDetails: React.FC<TicketManagementSystemDetailsProps
                   <CarouselContent>
                     {project.screenshots.admin.map((screenshot, index) => (
                       <CarouselItem key={index}>
-                        <div className="w-full flex items-center justify-center">
-                          <img src={screenshot} alt={`Admin Screenshot ${index + 1}`} className="max-w-full max-h-80 object-contain rounded" />
+                        <div className="w-full flex items-center justify-center min-w-0">
+                          <img src={screenshot} alt={`Admin Screenshot ${index + 1}`} className="max-w-full h-auto object-contain rounded" />
                         </div>
                       </CarouselItem>
                     ))}
@@ -134,8 +134,8 @@ const TicketManagementSystemDetails: React.FC<TicketManagementSystemDetailsProps
                   <CarouselContent>
                     {project.screenshots.mobile.map((screenshot, i) => (
                       <CarouselItem key={i}>
-                        <div className="w-full flex items-center justify-center">
-                          <img src={screenshot} alt={`Mobile ${i + 1}`} className="max-w-full max-h-80 object-contain rounded" />
+                        <div className="w-full flex items-center justify-center min-w-0">
+                          <img src={screenshot} alt={`Mobile ${i + 1}`} className="max-w-full h-auto object-contain rounded" />
                         </div>
                       </CarouselItem>
                     ))}
@@ -189,10 +189,10 @@ const TicketManagementSystemDetails: React.FC<TicketManagementSystemDetailsProps
 
       {/* Desktop / md+ layout - keep the richer grid and cards */}
   <div className="hidden md:block min-w-0">
-        <div className="mb-6">
+  <div className="mb-6 min-w-0">
           <h1 className="text-4xl font-bold mb-2 break-words">{project.title}</h1>
           <p className="text-lg text-muted-foreground mb-4">{project.subtitle}</p>
-          <div className="flex flex-wrap gap-2 min-w-0 overflow-hidden">
+          <div className="flex flex-wrap gap-2 min-w-0 overflow-hidden whitespace-normal">
             <Badge variant="default" className="bg-gradient-to-r from-blue-600 to-blue-700 text-white whitespace-normal">Full-Stack Development</Badge>
             <Badge variant="default" className="bg-gradient-to-r from-purple-600 to-purple-700 text-white">Real-Time Architecture</Badge>
             <Badge variant="default" className="bg-gradient-to-r from-green-600 to-green-700 text-white">Multi-Tenant SaaS</Badge>
@@ -414,8 +414,8 @@ const TicketManagementSystemDetails: React.FC<TicketManagementSystemDetailsProps
           </CardHeader>
           <CardContent>
             <h3 className="text-2xl font-bold mb-4">Admin Panel</h3>
-            {project.screenshots?.admin && (
-              <Carousel className="mb-8 overflow-hidden">
+              {project.screenshots?.admin && (
+              <Carousel className="mb-8 overflow-hidden relative">
                 <CarouselContent>
                   {project.screenshots.admin.map((screenshot, index) => (
                     <CarouselItem key={index}>
@@ -430,7 +430,7 @@ const TicketManagementSystemDetails: React.FC<TicketManagementSystemDetailsProps
 
             <h3 className="text-2xl font-bold mb-4">Mobile App</h3>
             {project.screenshots?.mobile && (
-              <Carousel className="overflow-hidden">
+              <Carousel className="overflow-hidden relative">
                 <CarouselContent>
                   {project.screenshots.mobile.map((screenshot, index) => (
                     <CarouselItem key={index}>

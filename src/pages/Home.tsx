@@ -121,12 +121,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse" />
-          </div>
-        </div>
+        {/* Scroll indicator removed per user request */}
       </section>
     </PageTransition>
   );

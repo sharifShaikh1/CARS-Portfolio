@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Sparkles, Info } from "lucide-react";
 import { projects } from "@/lib/projectsData";
@@ -48,6 +49,11 @@ const Projects = () => {
                       </div>
                       <h3 className="text-4xl font-black text-primary-foreground mb-2">{project.title}</h3>
                       <p className="text-xl text-primary-foreground/80 font-semibold">{project.subtitle}</p>
+                      {project.id === 'ticketmanagementsystem' && (
+                        <div className="mt-3">
+                          <Badge className="bg-yellow-400 text-black">Currently working</Badge>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -110,7 +116,7 @@ const Projects = () => {
                         </a>
                       </Button>
                     )}
-                    <Button variant="glow" size="lg" asChild>
+                    <Button variant="chrome" size="lg" asChild>
                       <a href={`/project/${project.id}`} rel="noopener noreferrer">
                         <Info className="mr-2" />
                         View Details

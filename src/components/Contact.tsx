@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, Instagram } from "lucide-react";
 
 const Contact = () => {
   const contactInfo = [
@@ -40,12 +40,12 @@ const Contact = () => {
       href: "https://github.com/sharifshaikh1",
       color: "primary",
     },
-    {
-      icon: ExternalLink,
-      label: "Portfolio",
-      href: "https://sharif-portfolio.onrender.com",
-      color: "accent",
-    },
+   {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/sharif__shaikh26/",
+    color: "accent",
+   }
   ];
 
   return (
